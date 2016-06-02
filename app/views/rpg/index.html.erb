@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style type="text/css">
+body {
+	font-family: Arial;
+	font-size: 1.5em;
+	text-align: center;
+}
+#container {
+	width: 800px;
+	height: 600px;
+	margin-top: 40px;
+/*	margin-left: 50px;*/
+	border: 3px solid black;
+	display: inline-block;
+	padding: 20px;
+}
+.boxes {
+	width: 170px;
+	height: 130px;
+	border: 2px solid black;
+	display: inline-block;
+	margin: 10px;
+	vertical-align: top;
+	text-align: center;
+	padding-top: 30px;
+}
+#h4 {
+	font-size: 1.5em;
+	color: red;
+}
+#gold {
+	background-color: red;
+	width: 100px;
+}
+#activities {
+	font-size: 0.7em;
+	width: 800px;
+	height: 160px;
+	margin-top: -25px;
+	text-align: center;
+	border: 2px solid black;
+	overflow-y: scroll;
+}
+.box {
+	font-size: 0.6em;
+}
+#messages {
+	height: 130px;
+}
+#start_over {
+	margin-top: -100px;
+}
+</style>
+	<title>Ninja Gold Game</title>
+</head>
+<body>
+
+<div id="container">
+		<h4>Your Gold: <%= session[:total_gold] %></h4>
+		<div class="boxes">Farm<br> <span class="box">(earns 10-20 golds)</span>
+			<form action="/rpg/farm" method="post">
+			<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+			<input id="farm" type="hidden" name="building" value="farm"/>
+			<input type="submit" value="Find Gold!"/>
+			</form>
+		</div>
+		<div class="boxes">Cave<br> <span class="box">(earns 5-10 golds)</span>
+			<form action="/rpg/cave" method="post">
+			<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+			<input id="cave" type="hidden" name="building" value="cave"/>
+			<input type="submit" value="Find Gold!"/>
+			</form>
+		</div>
+		<div class="boxes">House<br> <span class="box">(earns 2-5 golds)</span>
+			<form action="/rpg/house" method="post">
+			<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+			<input id="house" type="hidden" name="building" value="house"/>
+			<input type="submit" value="Find Gold!"/>
+			</form>
+		</div>
+		<div class="boxes">Casino!<br> <span class="box">(earns/takes 0-50 golds)</span>
+			<form action="/rpg/casino" method="post">
+			<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+			<input id="casino" type="hidden" name="building" value="casino"/>
+			<input type="submit" value="Find Gold!"/>
+			</form>
+		</div>
+	<h5>Activities:</h5><div id="activities" height: 130px>
+		<% @message.reverse.each do |messages| %>
+		<%= messages %><br>
+		<% end %>
+	</div>
+</div>
+
+</body>
+</html>
